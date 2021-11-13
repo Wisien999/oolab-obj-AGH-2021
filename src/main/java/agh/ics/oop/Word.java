@@ -18,7 +18,7 @@ public class Word {
         engine.run();
 
         MapVisualizer mapVisualizer = new MapVisualizer(map);
-        System.out.println(mapVisualizer.draw(new Vector2d(0, 0), new Vector2d(10, 5)));
+        System.out.println(mapVisualizer.draw(new Vector2d(0, 0), new Vector2d(9, 4)));
 
         System.out.println("ended\n");
     }

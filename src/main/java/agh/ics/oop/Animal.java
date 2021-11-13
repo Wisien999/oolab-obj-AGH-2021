@@ -6,7 +6,7 @@ public class Animal {
     private MapDirection orientation = MapDirection.NORTH;
     private Vector2d previousPosition;
     private Vector2d position = new Vector2d(2, 2);
-    private IWorldMap map;
+    private final IWorldMap map;
 
     Animal(IWorldMap map) {
         this.map = map;
@@ -21,7 +21,6 @@ public class Animal {
 
     public void move(MoveDirection direction) {
         Vector2d orientationVector = this.orientation.toUnitVector();
-
 
 
         switch (direction) {

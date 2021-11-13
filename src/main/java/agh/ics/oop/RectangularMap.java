@@ -13,7 +13,7 @@ public class RectangularMap implements IWorldMap {
     public RectangularMap() {
         this.width = 5;
         this.height = 5;
-        this.upperRight = new Vector2d(this.width, this.height);
+        this.upperRight = new Vector2d(this.width - 1, this.height - 1);
     }
 
     public RectangularMap(int width, int height) {
@@ -21,7 +21,7 @@ public class RectangularMap implements IWorldMap {
         if (width > 0 || height > 0) {
             this.width = width;
             this.height = height;
-            this.upperRight = new Vector2d(width, height);
+            this.upperRight = new Vector2d(width - 1, height - 1);
         }
     }
 
