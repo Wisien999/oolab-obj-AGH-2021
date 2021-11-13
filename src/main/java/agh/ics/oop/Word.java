@@ -10,34 +10,20 @@ import java.util.stream.Collectors;
 public class Word {
     public static void main(String[] args) {
         System.out.println("\n\nstarted");
-        Animal animal = new Animal();
-        System.out.println(animal);
 
-        List<String> strMoves = Arrays.asList("f", "forward", "f", "right", "f", "r", "r", "b");
-        OptionsParser optionsParser = new OptionsParser();
-        List<MoveDirection> moves = optionsParser.parse(Arrays.asList(args));
+        List<MoveDirection> directions = new OptionsParser().parse(Arrays.asList(args));
+        IWorldMap map = new RectangularMap(10, 5);
+        List<Vector2d> positions = Arrays.asList(new Vector2d(2,2), new Vector2d(3,4));
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run();
 
-        for (MoveDirection move : moves) {
-            System.out.println(move);
-            animal.move(move);
-        }
-
-        System.out.println(animal);
-
+        MapVisualizer mapVisualizer = new MapVisualizer(map);
+        System.out.println(mapVisualizer.draw(new Vector2d(0, 0), new Vector2d(10, 5)));
 
         System.out.println("ended\n");
     }
 
     static void run(List<Direction> args) {
-//        System.out.println("the pet goes forward");
-
-//        for (int i = 0; i < args.size(); i++) {
-//            System.out.print(args[i]);
-//            if (i < args.size() - 1) System.out.print(", ");
-//        }
-//        System.out.println();
-
-
         for (Direction move : args) {
             switch (move) {
                 case FORWARD:
