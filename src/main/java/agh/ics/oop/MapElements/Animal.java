@@ -1,6 +1,10 @@
-package agh.ics.oop;
+package agh.ics.oop.MapElements;
 
-import java.text.MessageFormat;
+import agh.ics.oop.MapDirection;
+import agh.ics.oop.MapElements.AbstractMapElement;
+import agh.ics.oop.MapTypes.IWorldMap;
+import agh.ics.oop.MoveDirection;
+import agh.ics.oop.Vector2d;
 
 public class Animal extends AbstractMapElement {
     private MapDirection orientation = MapDirection.NORTH;

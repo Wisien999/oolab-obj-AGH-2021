@@ -1,5 +1,8 @@
-package agh.ics.oop;
+package agh.ics.oop.MapTypes;
 
+
+import agh.ics.oop.MapElements.Animal;
+import agh.ics.oop.Vector2d;
 
 public class RectangularMap extends AbstractWorldMap implements IWorldMap {
     private int width;

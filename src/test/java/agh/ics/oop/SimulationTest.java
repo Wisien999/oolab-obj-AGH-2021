@@ -1,5 +1,7 @@
 package agh.ics.oop;
 
+import agh.ics.oop.MapTypes.IWorldMap;
+import agh.ics.oop.MapTypes.RectangularMap;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 

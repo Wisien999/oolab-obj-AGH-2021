@@ -1,4 +1,8 @@
-package agh.ics.oop;
+package agh.ics.oop.MapTypes;
+
+import agh.ics.oop.MapElements.AbstractMapElement;
+import agh.ics.oop.MapVisualizer;
+import agh.ics.oop.Vector2d;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,5 +1,8 @@
 package agh.ics.oop;
 
+import agh.ics.oop.MapTypes.GrassField;
+import agh.ics.oop.MapTypes.IWorldMap;
+
 import java.util.Arrays;
 import java.util.List;
 

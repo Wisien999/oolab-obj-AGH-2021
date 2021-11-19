@@ -1,4 +1,8 @@
-package agh.ics.oop;
+package agh.ics.oop.MapTypes;
+
+import agh.ics.oop.MapElements.Animal;
+import agh.ics.oop.MapElements.Grass;
+import agh.ics.oop.Vector2d;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
