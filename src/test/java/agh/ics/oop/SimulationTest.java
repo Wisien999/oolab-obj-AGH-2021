@@ -22,13 +22,15 @@ public class SimulationTest {
         String result = mapVisualizer.draw(new Vector2d(0, 0), new Vector2d(2, 3));
         System.out.println(result);
         String expectedRes =
-                        " y\\x  0 1 2\n" +
-                        "  4: -------\n" +
-                        "  3: | | | |\n" +
-                        "  2: | | |E|\n" +
-                        "  1: | |W| |\n" +
-                        "  0: |N| | |\n" +
-                        " -1: -------\n";
+                """
+                         y\\x  0 1 2
+                          4: -------
+                          3: | | | |
+                          2: | | |E|
+                          1: | |W| |
+                          0: |N| | |
+                         -1: -------
+                        """;
 
         Assertions.assertEquals(expectedRes, result);
     }
@@ -46,14 +48,16 @@ public class SimulationTest {
         String result = mapVisualizer.draw(new Vector2d(0, 0), new Vector2d(6, 4));
         System.out.println(result);
         String expectedRes =
-                " y\\x  0 1 2 3 4 5 6\n" +
-                "  5: ---------------\n" +
-                "  4: | | | | | | | |\n" +
-                "  3: | | | | | | | |\n" +
-                "  2: | |E| | | | | |\n" +
-                "  1: |W| | | | | | |\n" +
-                "  0: | | | | | | | |\n" +
-                " -1: ---------------\n";
+                """
+                         y\\x  0 1 2 3 4 5 6
+                          5: ---------------
+                          4: | | | | | | | |
+                          3: | | | | | | | |
+                          2: | |E| | | | | |
+                          1: |W| | | | | | |
+                          0: | | | | | | | |
+                         -1: ---------------
+                        """;
 
         Assertions.assertEquals(expectedRes, result);
     }
@@ -71,14 +75,16 @@ public class SimulationTest {
         String result = mapVisualizer.draw(new Vector2d(0, 0), new Vector2d(6, 4));
         System.out.println(result);
         String expectedRes =
-                " y\\x  0 1 2 3 4 5 6\n" +
-                "  5: ---------------\n" +
-                "  4: | | | | | | | |\n" +
-                "  3: | | | | | | | |\n" +
-                "  2: | | | | |E| | |\n" +
-                "  1: |W| | | | | | |\n" +
-                "  0: | | | | | | | |\n" +
-                " -1: ---------------\n";
+                """
+                         y\\x  0 1 2 3 4 5 6
+                          5: ---------------
+                          4: | | | | | | | |
+                          3: | | | | | | | |
+                          2: | | | | |E| | |
+                          1: |W| | | | | | |
+                          0: | | | | | | | |
+                         -1: ---------------
+                        """;
 
         Assertions.assertEquals(expectedRes, result);
     }
@@ -95,14 +101,16 @@ public class SimulationTest {
         MapVisualizer mapVisualizer = new MapVisualizer(worldMap);
         String result = mapVisualizer.draw(new Vector2d(0, 0), new Vector2d(9, 4));
         String expectedRes =
-                " y\\x  0 1 2 3 4 5 6 7 8 9\n" +
-                "  5: ---------------------\n" +
-                "  4: | | | |N| | | | | | |\n" +
-                "  3: | | | | | | | | | | |\n" +
-                "  2: | | | | | | | | | | |\n" +
-                "  1: | | | | | | | | | | |\n" +
-                "  0: | | |S| | | | | | | |\n" +
-                " -1: ---------------------\n";
+                """
+                         y\\x  0 1 2 3 4 5 6 7 8 9
+                          5: ---------------------
+                          4: | | | |N| | | | | | |
+                          3: | | | | | | | | | | |
+                          2: | | | | | | | | | | |
+                          1: | | | | | | | | | | |
+                          0: | | |S| | | | | | | |
+                         -1: ---------------------
+                        """;
 
         Assertions.assertEquals(expectedRes, result);
     }
