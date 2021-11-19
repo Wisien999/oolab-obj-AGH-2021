@@ -11,13 +11,13 @@ public class Animal extends AbstractMapElement {
     private Vector2d previousPosition;
     private final IWorldMap map;
 
-    Animal(IWorldMap map) {
+    public Animal(IWorldMap map) {
         super(new Vector2d(2, 2));
         this.map = map;
 //        this(map, new Vector2d(2, 2));
     }
 
-    Animal(IWorldMap map, Vector2d initialPosition) {
+    public Animal(IWorldMap map, Vector2d initialPosition) {
         super(initialPosition);
         this.map = map;
     }

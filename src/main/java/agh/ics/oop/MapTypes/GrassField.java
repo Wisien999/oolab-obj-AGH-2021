@@ -27,13 +27,14 @@ public class GrassField extends AbstractWorldMap implements IWorldMap {
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return !(this.objectAt(position) instanceof Animal);
+        return position != null && !(this.objectAt(position) instanceof Animal);
     }
 
     @Override
     public boolean place(Animal animal) {
         if (animal == null) return false;
         if (animal.getPosition() == null) return false;
+        if (!this.canMoveTo(animal.getPosition())) return false;
 
         if (animal.getPreviousPosition() != null) {
             this.map.remove(animal.getPreviousPosition());
@@ -56,12 +57,20 @@ public class GrassField extends AbstractWorldMap implements IWorldMap {
 
     @Override
     public Vector2d getLowerLeftDrawLimit() {
+        if (this.map.isEmpty()) {
+            return new Vector2d(0, 0);
+        }
+
         Set<Vector2d> positionsSet = this.map.keySet();
         return positionsSet.stream().reduce(positionsSet.iterator().next(), Vector2d::lowerLeft);
     }
 
     @Override
     public Vector2d getUpperRightDrawLimit() {
+        if (this.map.isEmpty()) {
+            return new Vector2d(0, 0);
+        }
+
         Set<Vector2d> positionsSet = this.map.keySet();
         return positionsSet.stream().reduce(positionsSet.iterator().next(), Vector2d::upperRight);
     }
