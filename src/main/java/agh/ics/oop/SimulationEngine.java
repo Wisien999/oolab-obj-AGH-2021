@@ -1,26 +1,29 @@
 package agh.ics.oop;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
 
 public class SimulationEngine implements IEngine {
-    private IWorldMap map;
-    private List<MoveDirection> moves;
-    private List<Animal> animals;
+    private final IWorldMap map;
+    private final List<MoveDirection> moves;
+    private final List<Animal> animals = new ArrayList<>();
 
     public SimulationEngine(List<MoveDirection> moves, IWorldMap map, List<Vector2d> initialPositions) {
         this.moves = moves;
         this.map = map;
 
-        this.animals = initialPositions.stream()
+        List<Animal> animals = initialPositions.stream()
                 .map(pos -> new Animal(this.map, pos))
                 .collect(Collectors.toList());
 
 
-        for (Animal animal :
-                this.animals) {
-            if (this.map.canMoveTo(animal.getPosition())) this.map.place(animal);
+        for (Animal animal : animals) {
+            if (this.map.canMoveTo(animal.getPosition())) {
+                this.animals.add(animal);
+                this.map.place(animal);
+            }
         }
     }
 

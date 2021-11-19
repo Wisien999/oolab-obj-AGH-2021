@@ -1,14 +1,11 @@
 package agh.ics.oop;
 
-import java.util.HashMap;
-import java.util.Map;
 
-public class RectangularMap implements IWorldMap {
+public class RectangularMap extends AbstractWorldMap implements IWorldMap {
     private int width;
     private int height;
     private Vector2d upperRight;
-    private Vector2d lowerLeft = new Vector2d(0, 0);
-    private Map<Vector2d, Animal> map = new HashMap<>();
+    private final Vector2d lowerLeft = new Vector2d(0, 0);
 
     public RectangularMap() {
         this.width = 5;
@@ -26,17 +23,12 @@ public class RectangularMap implements IWorldMap {
     }
 
     public boolean isInsideTheMap(Vector2d position) {
-        return position.precedes(this.upperRight) && position.follows(new Vector2d(0, 0));
+        return position.precedes(this.upperRight) && position.follows(this.lowerLeft);
     }
 
     @Override
     public boolean canMoveTo(Vector2d position) {
         return isInsideTheMap(position) && !isOccupied(position);
-    }
-
-    @Override
-    public boolean isOccupied(Vector2d position) {
-        return this.map.containsKey(position);
     }
 
     @Override
@@ -55,13 +47,12 @@ public class RectangularMap implements IWorldMap {
     }
 
     @Override
-    public String toString() {
-        MapVisualizer mapVisualizer = new MapVisualizer(this);
-        return mapVisualizer.draw(this.lowerLeft, this.upperRight);
+    public Vector2d getLowerLeftDrawLimit() {
+        return this.lowerLeft;
     }
 
     @Override
-    public Object objectAt(Vector2d position) {
-        return this.map.get(position);
+    public Vector2d getUpperRightDrawLimit() {
+        return this.upperRight;
     }
 }
