@@ -1,6 +1,6 @@
 package agh.ics.oop.MapTypes;
 
-import agh.ics.oop.MapElements.AbstractMapElement;
+import agh.ics.oop.MapElements.AbstractWorldMapElement;
 import agh.ics.oop.MapVisualizer;
 import agh.ics.oop.Vector2d;
 
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractWorldMap implements IWorldMap {
-    protected final Map<Vector2d, AbstractMapElement> map = new HashMap<>();
+    protected final Map<Vector2d, AbstractWorldMapElement> map = new HashMap<>();
 
     @Override
     public boolean isOccupied(Vector2d position) {
