@@ -1,14 +1,18 @@
 package agh.ics.oop.MapElements;
 
+import agh.ics.oop.IPositionChangeObserver;
 import agh.ics.oop.MapDirection;
 import agh.ics.oop.MapTypes.IWorldMap;
 import agh.ics.oop.MoveDirection;
 import agh.ics.oop.Vector2d;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Animal extends AbstractWorldMapElement {
     private MapDirection orientation = MapDirection.NORTH;
-    private Vector2d previousPosition;
     private final IWorldMap map;
+    private final List<IPositionChangeObserver> positionObservers = new ArrayList<>();
 
     public Animal(IWorldMap map) {
         super(new Vector2d(2, 2));
@@ -35,15 +39,24 @@ public class Animal extends AbstractWorldMapElement {
                     default -> this.position;
                 };
                 if (this.map.canMoveTo(newPosition)) {
-                    Vector2d prevPrevPosition = this.previousPosition;
-                    this.previousPosition = position;
+                    this.positionChanged(this.position, newPosition);
                     this.position = newPosition;
-                    if (!this.map.place(this)) {
-                        this.position = this.previousPosition;
-                        this.previousPosition = prevPrevPosition;
-                    }
                 }
             }
+        }
+    }
+
+    public void addObserver(IPositionChangeObserver observer) {
+        this.positionObservers.add(observer);
+    }
+
+    public void removeObserver(IPositionChangeObserver observer) {
+        this.positionObservers.remove(observer);
+    }
+
+    void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        for (IPositionChangeObserver observer : this.positionObservers) {
+            observer.positionChanged(oldPosition, newPosition);
         }
     }
 
@@ -59,5 +72,4 @@ public class Animal extends AbstractWorldMapElement {
 
     public MapDirection getOrientation() {return orientation;}
     public Vector2d getPosition() {return position;}
-    public Vector2d getPreviousPosition() {return previousPosition;}
 }

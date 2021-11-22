@@ -32,12 +32,8 @@ public class GrassField extends AbstractWorldMap implements IWorldMap {
 
     @Override
     public boolean place(Animal animal) {
-        if (animal == null) return false;
-        if (animal.getPosition() == null) return false;
-        if (!this.canMoveTo(animal.getPosition())) return false;
-
-        if (animal.getPreviousPosition() != null) {
-            this.map.remove(animal.getPreviousPosition());
+        if (!super.place(animal)) {
+            return false;
         }
 
         if (this.objectAt(animal.getPosition()) instanceof Grass) {

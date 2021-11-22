@@ -36,15 +36,14 @@ public class RectangularMap extends AbstractWorldMap implements IWorldMap {
 
     @Override
     public boolean place(Animal animal) {
-        if (animal == null) return false;
-        if (animal.getPosition() == null) return false;
-        if (this.map.get(animal.getPosition()) instanceof Animal) return false;
-        if (isOccupied(animal.getPosition())) return false;
-        if (!isInsideTheMap(animal.getPosition())) return false;
-
-        if (animal.getPreviousPosition() != null) {
-            this.map.remove(animal.getPreviousPosition());
+        if (!super.place(animal)) {
+            return false;
         }
+        if (!isInsideTheMap(animal.getPosition())) {
+            animal.removeObserver(this);
+            return false;
+        }
+
         this.map.put(animal.getPosition(), animal);
 
         return true;
@@ -59,4 +58,5 @@ public class RectangularMap extends AbstractWorldMap implements IWorldMap {
     public Vector2d getUpperRightDrawLimit() {
         return this.upperRight;
     }
+
 }
