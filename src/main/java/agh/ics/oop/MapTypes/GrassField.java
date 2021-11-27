@@ -36,19 +36,24 @@ public class GrassField extends AbstractWorldMap implements IWorldMap {
             return false;
         }
 
-        if (this.objectAt(animal.getPosition()) instanceof Grass) {
+        this.map.put(animal.getPosition(), animal);
+
+        return true;
+    }
+
+    @Override
+    public boolean positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        if (this.objectAt(newPosition) instanceof Grass) {
+            this.map.remove(newPosition);
             Vector2d grassPosition;
             do {
                 int x = ThreadLocalRandom.current().nextInt(0, this.maxGrassX + 1);
                 int y = ThreadLocalRandom.current().nextInt(0, this.maxGrassY + 1);
                 grassPosition = new Vector2d(x, y);
-            } while (this.isOccupied(grassPosition) || grassPosition.equals(animal.getPosition()));
+            } while (this.isOccupied(grassPosition));
             this.map.put(grassPosition, new Grass(grassPosition));
         }
-
-        this.map.put(animal.getPosition(), animal);
-
-        return true;
+        return super.positionChanged(oldPosition, newPosition);
     }
 
     @Override
