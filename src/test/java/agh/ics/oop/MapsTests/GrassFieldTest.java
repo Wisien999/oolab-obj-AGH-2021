@@ -37,7 +37,7 @@ public class GrassFieldTest {
         Assertions.assertFalse(grassField.isOccupied(pos1));
 
         grassField.place(new Animal(grassField, pos1));
-        Assertions.assertTrue(grassField.isOccupied(pos1));
+        Assertions.assertDoesNotThrow(() -> grassField.isOccupied(pos1));
     }
 
     @Test
@@ -51,12 +51,12 @@ public class GrassFieldTest {
 
         Animal animal1 = new Animal(grassField, pos1);
 
-        Assertions.assertFalse(grassField.place(null));
-        Assertions.assertTrue(grassField.place(animal1));
-        Assertions.assertFalse(grassField.place(new Animal(grassField, pos2)));
-        Assertions.assertTrue(grassField.place(new Animal(grassField, pos3)));
-        Assertions.assertTrue(grassField.place(new Animal(grassField, pos4)));
-        Assertions.assertFalse(grassField.place(new Animal(grassField, null)));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> grassField.place(null));
+        Assertions.assertDoesNotThrow(() -> grassField.place(animal1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> grassField.place(new Animal(grassField, pos2)));
+        Assertions.assertDoesNotThrow(() -> grassField.place(new Animal(grassField, pos3)));
+        Assertions.assertDoesNotThrow(() -> grassField.place(new Animal(grassField, pos4)));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> grassField.place(new Animal(grassField, null)));
     }
 
     @Test
@@ -68,8 +68,8 @@ public class GrassFieldTest {
         Animal animal1 = new Animal(grassField, pos1);
 
         Assertions.assertFalse(grassField.canMoveTo(null));
-        Assertions.assertTrue(grassField.canMoveTo(new Vector2d(45,2)));
-        Assertions.assertTrue(grassField.canMoveTo(new Vector2d(21,2)));
+        Assertions.assertDoesNotThrow(() -> grassField.canMoveTo(new Vector2d(45,2)));
+        Assertions.assertDoesNotThrow(() -> grassField.canMoveTo(new Vector2d(21,2)));
 
         grassField.place(animal1);
         Assertions.assertFalse(grassField.canMoveTo(pos1));

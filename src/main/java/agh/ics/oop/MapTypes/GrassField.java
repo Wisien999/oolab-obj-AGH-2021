@@ -1,5 +1,6 @@
 package agh.ics.oop.MapTypes;
 
+import agh.ics.oop.MapBoundary;
 import agh.ics.oop.MapElements.Animal;
 import agh.ics.oop.MapElements.Grass;
 import agh.ics.oop.Vector2d;
@@ -9,6 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GrassField extends AbstractWorldMap implements IWorldMap {
     private final int maxGrassX, maxGrassY;
+    protected final MapBoundary mapBoundary = new MapBoundary();
 
     public GrassField(int noOfGrassBlocks) {
         this.maxGrassX = (int) Math.sqrt(noOfGrassBlocks*10);
@@ -31,18 +33,15 @@ public class GrassField extends AbstractWorldMap implements IWorldMap {
     }
 
     @Override
-    public boolean place(Animal animal) {
-        if (!super.place(animal)) {
-            return false;
-        }
+    public void place(Animal animal) {
+        super.place(animal);
 
         this.map.put(animal.getPosition(), animal);
-
-        return true;
+        this.mapBoundary.addWorldMapElement(animal);
     }
 
     @Override
-    public boolean positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+    public boolean positionChanged(Object object, Vector2d oldPosition, Vector2d newPosition) {
         if (this.objectAt(newPosition) instanceof Grass) {
             this.map.remove(newPosition);
             Vector2d grassPosition;
@@ -53,7 +52,7 @@ public class GrassField extends AbstractWorldMap implements IWorldMap {
             } while (this.isOccupied(grassPosition));
             this.map.put(grassPosition, new Grass(grassPosition));
         }
-        return super.positionChanged(oldPosition, newPosition);
+        return super.positionChanged(object, oldPosition, newPosition);
     }
 
     @Override
@@ -62,8 +61,7 @@ public class GrassField extends AbstractWorldMap implements IWorldMap {
             return new Vector2d(0, 0);
         }
 
-        Set<Vector2d> positionsSet = this.map.keySet();
-        return positionsSet.stream().reduce(positionsSet.iterator().next(), Vector2d::lowerLeft);
+        return this.mapBoundary.getLowerLeftCorner();
     }
 
     @Override
@@ -72,7 +70,6 @@ public class GrassField extends AbstractWorldMap implements IWorldMap {
             return new Vector2d(0, 0);
         }
 
-        Set<Vector2d> positionsSet = this.map.keySet();
-        return positionsSet.stream().reduce(positionsSet.iterator().next(), Vector2d::upperRight);
+        return this.mapBoundary.getUpperRightCorner();
     }
 }

@@ -6,7 +6,6 @@ import agh.ics.oop.MapElements.Animal;
 import agh.ics.oop.MapVisualizer;
 import agh.ics.oop.Vector2d;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -30,19 +29,18 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
     }
 
     @Override
-    public boolean place(Animal animal) {
-        if (animal == null) return false;
-        if (animal.getPosition() == null) return false;
-        if (this.map.get(animal.getPosition()) instanceof Animal) return false;
-
+    public void place(Animal animal) {
+        if (animal == null) throw new IllegalArgumentException("null can't be placed on the worldMap");
+        if (animal.getPosition() == null ||
+            this.map.get(animal.getPosition()) instanceof Animal) {
+            throw new IllegalArgumentException("Object can't be placed on position " + animal.getPosition());
+        }
 
         animal.addObserver(this);
-
-        return true;
     }
 
     @Override
-    public boolean positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+    public boolean positionChanged(Object object, Vector2d oldPosition, Vector2d newPosition) {
         AbstractWorldMapElement worldMapElement = this.map.get(oldPosition);
         this.map.put(newPosition, worldMapElement);
         this.map.remove(oldPosition);

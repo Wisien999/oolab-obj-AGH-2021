@@ -23,10 +23,8 @@ public class SimulationEngine implements IEngine {
 
 
         for (Animal animal : animals) {
-            if (this.map.canMoveTo(animal.getPosition())) {
-                this.animals.add(animal);
-                this.map.place(animal);
-            }
+            this.map.place(animal);
+            this.animals.add(animal);
         }
     }
 

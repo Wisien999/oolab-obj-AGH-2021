@@ -2,6 +2,7 @@ package agh.ics.oop;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,12 +17,10 @@ public class OptionsParserTest {
         assertEquals(moves1, this.optionsParser.parse(strMoves1));
 
         List<String> strMoves2 = Arrays.asList("f", "forward", "ffa", "right", "f", "l", "left", "backward");
-        List<MoveDirection> moves2 = Arrays.asList(MoveDirection.FORWARD, MoveDirection.FORWARD, MoveDirection.RIGHT, MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.LEFT, MoveDirection.BACKWARD);
-        assertEquals(moves2, this.optionsParser.parse(strMoves2));
+        assertThrows(IllegalArgumentException.class, () -> this.optionsParser.parse(strMoves2));
 
         List<String> strMoves3 = Arrays.asList("b", "ffa", "right", "f", "l", "left", "backward");
-        List<MoveDirection> moves3 = Arrays.asList(MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.LEFT, MoveDirection.BACKWARD);
-        assertEquals(moves3, this.optionsParser.parse(strMoves3));
+        assertThrows(IllegalArgumentException.class, () -> this.optionsParser.parse(strMoves3));
 
         List<String> strMoves4 = Arrays.asList("b");
         List<MoveDirection> moves4 = Arrays.asList(MoveDirection.BACKWARD);

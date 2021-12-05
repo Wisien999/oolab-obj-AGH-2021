@@ -66,12 +66,12 @@ public class RectangularMapTest {
 
         Animal animal1 = new Animal(rectangularMap, pos1);
 
-        Assertions.assertFalse(rectangularMap.place(null));
-        Assertions.assertTrue(rectangularMap.place(animal1));
-        Assertions.assertFalse(rectangularMap.place(new Animal(rectangularMap, pos2)));
-        Assertions.assertTrue(rectangularMap.place(new Animal(rectangularMap, pos3)));
-        Assertions.assertFalse(rectangularMap.place(new Animal(rectangularMap, new Vector2d(width, height))));
-        Assertions.assertFalse(rectangularMap.place(new Animal(rectangularMap, null)));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> rectangularMap.place(null));
+        Assertions.assertDoesNotThrow(() -> rectangularMap.place(animal1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> rectangularMap.place(new Animal(rectangularMap, pos2)));
+        Assertions.assertDoesNotThrow(() -> rectangularMap.place(new Animal(rectangularMap, pos3)));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> rectangularMap.place(new Animal(rectangularMap, new Vector2d(width, height))));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> rectangularMap.place(new Animal(rectangularMap, null)));
     }
 
     @Test

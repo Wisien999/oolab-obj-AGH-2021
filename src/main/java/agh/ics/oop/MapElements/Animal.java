@@ -9,10 +9,9 @@ import agh.ics.oop.Vector2d;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Animal extends AbstractWorldMapElement {
+public class Animal extends AbstractMovableWorldMapElement {
     private MapDirection orientation = MapDirection.NORTH;
     private final IWorldMap map;
-    private final List<IPositionChangeObserver> positionObservers = new ArrayList<>();
 
     public Animal(IWorldMap map) {
         super(new Vector2d(2, 2));
@@ -43,20 +42,6 @@ public class Animal extends AbstractWorldMapElement {
                     this.position = newPosition;
                 }
             }
-        }
-    }
-
-    public void addObserver(IPositionChangeObserver observer) {
-        this.positionObservers.add(observer);
-    }
-
-    public void removeObserver(IPositionChangeObserver observer) {
-        this.positionObservers.remove(observer);
-    }
-
-    void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
-        for (IPositionChangeObserver observer : this.positionObservers) {
-            observer.positionChanged(oldPosition, newPosition);
         }
     }
 

@@ -35,18 +35,15 @@ public class RectangularMap extends AbstractWorldMap implements IWorldMap {
     }
 
     @Override
-    public boolean place(Animal animal) {
-        if (!super.place(animal)) {
-            return false;
-        }
+    public void place(Animal animal) {
+        super.place(animal);
+
         if (!isInsideTheMap(animal.getPosition())) {
             animal.removeObserver(this);
-            return false;
+            throw new IllegalArgumentException("Object can't be placed on position " + animal.getPosition() + ". It is outside the world borders.");
         }
 
         this.map.put(animal.getPosition(), animal);
-
-        return true;
     }
 
     @Override
