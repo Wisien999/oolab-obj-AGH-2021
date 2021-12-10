@@ -6,11 +6,17 @@ import agh.ics.oop.MapElements.Animal;
 import agh.ics.oop.MapVisualizer;
 import agh.ics.oop.Vector2d;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
     protected final Map<Vector2d, AbstractWorldMapElement> map = new LinkedHashMap<>();
+
+    public Collection<AbstractWorldMapElement> getWorldMapElements(){
+        return this.map.values();
+    }
 
     @Override
     public boolean isOccupied(Vector2d position) {
