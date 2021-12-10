@@ -45,14 +45,23 @@ public class Animal extends AbstractMovableWorldMapElement {
         }
     }
 
+    public String toStringRepresentation() {
+        return "A " + this.orientation.toShortString() + " " + this.position.toString();
+    }
+
     public String toString() {
-        return switch (this.orientation) {
-            case NORTH -> "N";
-            case EAST -> "E";
-            case SOUTH -> "S";
-            case WEST -> "W";
+        return this.orientation.toShortString();
+    }
+
+    @Override
+    public String getImageResource() {
+        String basePath = PathConfig.imageBasePath;
+        return basePath + switch (this.getOrientation()) {
+            case NORTH -> "up.png";
+            case EAST -> "right.png";
+            case SOUTH -> "down.png";
+            case WEST -> "left.png";
         };
-//        return MessageFormat.format("Animal at position {0}, orientated {1}", this.position.toString(), this.orientation.toString());
     }
 
     public MapDirection getOrientation() {return orientation;}

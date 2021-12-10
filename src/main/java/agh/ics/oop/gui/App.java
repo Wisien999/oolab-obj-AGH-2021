@@ -2,6 +2,7 @@ package agh.ics.oop.gui;
 
 import agh.ics.oop.*;
 import agh.ics.oop.MapElements.AbstractWorldMapElement;
+import agh.ics.oop.MapElements.IMapElement;
 import agh.ics.oop.MapTypes.AbstractWorldMap;
 import agh.ics.oop.MapTypes.GrassField;
 import agh.ics.oop.MapTypes.IWorldMap;
@@ -9,10 +10,7 @@ import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.util.Arrays;
@@ -49,8 +47,8 @@ public class App extends Application {
         gridPane.setGridLinesVisible(true);
         gridPane.setHgap(0);
         gridPane.setVgap(0);
-        int cellWidth = 30;
-        int cellHeight = 30;
+        int cellWidth = 50;
+        int cellHeight = 50;
 
         int minY = this.map.getLowerLeftDrawLimit().y;
         int minX = this.map.getLowerLeftDrawLimit().x;
@@ -84,10 +82,11 @@ public class App extends Application {
                     continue;
                 }
 
-                Object worldMapElement = this.map.objectAt(position);
-                Label label = new Label(worldMapElement.toString());
-                GridPane.setHalignment(label, HPos.CENTER);
-                gridPane.add(label, position.x - minX + 1, maxY - (position.y - minY), 1, 1);
+                IMapElement worldMapElement = (IMapElement) this.map.objectAt(position);
+                GuiElementBox element = new GuiElementBox(worldMapElement);
+                VBox graphicalElement = element.getGraphicalElement();
+                GridPane.setHalignment(graphicalElement, HPos.CENTER);
+                gridPane.add(graphicalElement, position.x - minX + 1, maxY - (position.y - minY), 1, 1);
             }
         }
 

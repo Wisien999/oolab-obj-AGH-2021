@@ -17,6 +17,9 @@ public enum MapDirection {
             case WEST -> "Zachód";
         };
     }
+    public String toShortString() {
+        return this.name().substring(0, 1);
+    }
     public MapDirection next() {
         return switch (this) {
             case NORTH -> MapDirection.EAST;
