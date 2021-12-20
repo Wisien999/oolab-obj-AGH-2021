@@ -1,6 +1,7 @@
 package agh.ics.oop.MapElements;
 
 import agh.ics.oop.IPositionChangeObserver;
+import agh.ics.oop.MoveDirection;
 import agh.ics.oop.Vector2d;
 
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ abstract public class AbstractMovableWorldMapElement extends AbstractWorldMapEle
     public AbstractMovableWorldMapElement(Vector2d position) {
         super(position);
     }
+
+    public abstract void move(MoveDirection direction);
 
     public void addObserver(IPositionChangeObserver observer) {
         this.positionObservers.add(observer);

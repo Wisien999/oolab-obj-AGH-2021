@@ -1,6 +1,5 @@
 package agh.ics.oop.MapElements;
 
-import agh.ics.oop.IPositionChangeObserver;
 import agh.ics.oop.MapDirection;
 import agh.ics.oop.MapTypes.IWorldMap;
 import agh.ics.oop.MoveDirection;
