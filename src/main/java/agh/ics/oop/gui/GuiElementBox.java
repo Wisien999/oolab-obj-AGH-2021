@@ -11,17 +11,20 @@ import javafx.scene.text.Font;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class GuiElementBox {
+public class GuiElementBox implements IPositionChangeObserver {
+    protected IMapElement mapElement;
     protected VBox graphicalElement = new VBox(4);
+    protected Label label;
 
     public GuiElementBox(IMapElement mapElement) throws FileNotFoundException {
-        Image image = new Image(new FileInputStream(mapElement.getImageResource()));
+        this.mapElement = mapElement;
+        Image image = new Image(new FileInputStream(this.mapElement.getImageResource()));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(18);
         imageView.setFitHeight(18);
 
 
-        Label label = new Label(mapElement.toStringRepresentation());
+        this.label = new Label(this.mapElement.toStringRepresentation());
         label.setFont(Font.font(10d));
 
         this.graphicalElement.getChildren().add(imageView);
@@ -31,5 +34,12 @@ public class GuiElementBox {
 
     public VBox getGraphicalElement() {
         return graphicalElement;
+    }
+
+    @Override
+    public boolean positionChanged(Object object, Vector2d oldPosition, Vector2d newPosition) {
+        label.setText(this.mapElement.toStringRepresentation());
+        this.getGraphicalElement().getChildren().add(label);
+        return false;
     }
 }
